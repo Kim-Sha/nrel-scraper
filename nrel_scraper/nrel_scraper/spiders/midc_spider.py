@@ -1,6 +1,5 @@
-from io import StringIO
 import scrapy
-import pandas as pd
+from nrel_scraper.items import NrelScraperItem
 import pdb
 
 class MidcSpider(scrapy.Spider):
@@ -15,22 +14,6 @@ class MidcSpider(scrapy.Spider):
         explicitly told Scrapy to do so. This happens because parse()is Scrapy’s default callback method, which is
         called for requests without an explicitly assigned callback.
         """
-
-        # Parse data into a pandas dataframe
         data_text = response.xpath('//body/p/text()').get()
-        df = pd.read_csv(StringIO(data_text), sep=",")
-
-        # Clean data
-        try:
-            df['measurement_ts'] = pd.to_datetime(df['DATE (MM/DD/YYYY)'] + ' ' + df['MST']).dt.tz_localize('MST')
-            df.drop(['DATE (MM/DD/YYYY)', 'MST'], axis=1, inplace=True)
-            df['station_id'] = 1
-            df.columns = df.columns.str.lower()\
-                            .str.replace(r"\(.*\)|\[.*\]", '')\
-                            .str.replace('li-200', 'li200')\
-                            .str.strip().str.replace('-|\W+', '_')
-        except Exception as error:
-            raise error
-
         # Yield data
-        yield NrelScraperItem(content = df)
+        yield NrelScraperItem(data_text = data_text)

@@ -7,7 +7,10 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 from sqlalchemy import create_engine
+from io import StringIO
+import pandas as pd
 import os
+import pdb
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -27,5 +30,23 @@ class NrelScraperPipeline(object):
         self.engine.dispose()
 
     def process_item(self, item, spider):
-        item['content'].to_sql('irradiance', self.engine, if_exists='append', index=False)
-        return item
+
+        # Read ASCII text data into pandas dataframe and process
+        try:
+            df = pd.read_csv(StringIO(item['data_text']), sep=",")
+
+            df['measurement_ts'] = pd.to_datetime(df['DATE (MM/DD/YYYY)'] + ' ' + df['MST']).dt.tz_localize('MST')
+            df.drop(['DATE (MM/DD/YYYY)', 'MST'], axis=1, inplace=True)
+            df['station_id'] = 1
+            df.columns = df.columns.str.lower()\
+                            .str.replace(r"\(.*\)|\[.*\]", '')\
+                            .str.replace('li-200', 'li200')\
+                            .str.strip().str.replace(r'-|\W+', '_')
+
+            # Write to Postgres
+            df.to_sql('irradiance', self.engine, if_exists='append', index=False)
+
+        except Exception as error:
+            raise error
+
+        return f"DATA PROCESSED TO: {self.engine.url.database}"

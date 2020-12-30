@@ -5,8 +5,6 @@
 
 import scrapy
 
-
 class NrelScraperItem(scrapy.Item):
     # define the fields for your item here like:
-    content = scrapy.Field()
-    pass
+    data_text = scrapy.Field()

@@ -1,0 +1,41 @@
+attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1605083924122/work
+Automat==20.2.0
+bcrypt @ file:///Users/runner/miniforge3/conda-bld/bcrypt_1602546571764/work
+certifi==2020.6.20
+cffi @ file:///Users/runner/miniforge3/conda-bld/cffi_1606236207936/work
+click==7.1.2
+constantly==15.1.0
+cryptography @ file:///Users/runner/miniforge3/conda-bld/cryptography_1607606363495/work
+cssselect==1.1.0
+hyperlink @ file:///home/conda/feedstock_root/build_artifacts/hyperlink_1596631460104/work
+idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1593328102638/work
+incremental==17.5.0
+itemadapter @ file:///home/conda/feedstock_root/build_artifacts/itemadapter_1605109124033/work
+itemloaders @ file:///home/conda/feedstock_root/build_artifacts/itemloaders_1605273565796/work
+jmespath @ file:///home/conda/feedstock_root/build_artifacts/jmespath_1589369830981/work
+lxml @ file:///Users/runner/miniforge3/conda-bld/lxml_1606483631501/work
+mkl-fft==1.2.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+numpy @ file:///opt/concourse/worker/volumes/live/40d975a3-7e82-44c8-53df-feccdbce8b96/volume/numpy_and_numpy_base_1596233859108/work
+pandas @ file:///opt/concourse/worker/volumes/live/bfd63b8c-6035-4ed3-5bce-5690df409bf9/volume/pandas_1602088141563/work
+parsel @ file:///home/conda/feedstock_root/build_artifacts/parsel_1591122878042/work
+Protego==0.1.16
+psycopg2==2.8.4
+pyasn1==0.4.8
+pyasn1-modules==0.2.7
+pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1593275161868/work
+PyDispatcher==2.0.5
+PyHamcrest==2.0.2
+pyOpenSSL @ file:///home/conda/feedstock_root/build_artifacts/pyopenssl_1608055815057/work
+python-dateutil==2.8.1
+python-dotenv @ file:///home/conda/feedstock_root/build_artifacts/python-dotenv_1603979006023/work
+pytz==2020.1
+queuelib==1.5.0
+Scrapy @ file:///Users/runner/miniforge3/conda-bld/scrapy_1605626691151/work
+service-identity==18.1.0
+six==1.15.0
+SQLAlchemy @ file:///opt/concourse/worker/volumes/live/c8ccb658-c55f-4a2e-6c0c-7f57021ac0b1/volume/sqlalchemy_1598374749865/work
+Twisted @ file:///Users/runner/miniforge3/conda-bld/twisted_1602649030757/work
+w3lib @ file:///home/conda/feedstock_root/build_artifacts/w3lib_1591173357158/work
+zope.interface @ file:///Users/runner/miniforge3/conda-bld/zope.interface_1605096244724/work

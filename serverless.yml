@@ -12,6 +12,7 @@
 # Happy Coding!
 
 service: nrel-scraper
+useDotenv: true
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -24,6 +25,7 @@ provider:
   name: aws
   runtime: python3.8
   lambdaHashingVersion: 20201221
+  profile: serverless-admin
 
 # you can overwrite defaults here
 #  stage: dev
@@ -50,17 +52,18 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
-#  include:
-#    - include-me.py
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.py
-#    - exclude-me-dir/**
+package:
+ include:
+   - handler.py
+   - nrel_scraper/**
+   - scrapy.cfg
+   - .env
+ exclude:
+   - "./**"
 
 functions:
-  hello:
-    handler: handler.hello
+  nrelSrape:
+    handler: handler.scrape
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -112,3 +115,11 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    slim: true # Omits tests, __pycache__, *.pyc etc from dependencies
+    fileName: requirements.txt

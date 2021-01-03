@@ -10,7 +10,6 @@ from sqlalchemy import create_engine
 from io import StringIO
 import pandas as pd
 import os
-import pdb
 from dotenv import load_dotenv
 load_dotenv()
 

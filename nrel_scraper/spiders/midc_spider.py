@@ -1,6 +1,5 @@
 import scrapy
 from nrel_scraper.items import NrelScraperItem
-import pdb
 
 class MidcSpider(scrapy.Spider):
     name = "midc"

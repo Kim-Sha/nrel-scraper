@@ -23,7 +23,7 @@ frameworkVersion: '2'
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.7
   lambdaHashingVersion: 20201221
   profile: serverless-admin
 
@@ -62,7 +62,7 @@ package:
    - "./**"
 
 functions:
-  nrelSrape:
+  nrelScrape:
     handler: handler.scrape
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -123,3 +123,4 @@ custom:
   pythonRequirements:
     slim: true # Omits tests, __pycache__, *.pyc etc from dependencies
     fileName: requirements.txt
+    dockerizePip: non-linux

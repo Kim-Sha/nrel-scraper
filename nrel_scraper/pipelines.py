@@ -24,15 +24,18 @@ class NrelScraperPipeline(object):
         database = os.getenv('DATABASE')
 
         self.engine = create_engine(f'postgresql://{username}:{password}@{hostname}:5432/{database}')
+        print(f'====> SQLAlchemy engine created for database: {database} at hostname: {hostname}')
 
     def close_spider(self, spider):
         self.engine.dispose()
+        print('====> SQLAlchemy engine disposed')
 
     def process_item(self, item, spider):
 
         # Read ASCII text data into pandas dataframe and process
         try:
             df = pd.read_csv(StringIO(item['data_text']), sep=",")
+            print('====> ASCII text data read into Pandas dataframe')
 
             df['measurement_ts'] = pd.to_datetime(df['DATE (MM/DD/YYYY)'] + ' ' + df['MST']).dt.tz_localize('MST')
             df.drop(['DATE (MM/DD/YYYY)', 'MST'], axis=1, inplace=True)
@@ -41,6 +44,7 @@ class NrelScraperPipeline(object):
                             .str.replace(r"\(.*\)|\[.*\]", '')\
                             .str.replace('li-200', 'li200')\
                             .str.strip().str.replace(r'-|\W+', '_')
+            print('====> Dataframe cleaned')
 
             # Write to Postgres
             df.to_sql('irradiance', self.engine, if_exists='append', index=False)
@@ -48,4 +52,4 @@ class NrelScraperPipeline(object):
         except Exception as error:
             raise error
 
-        return f"DATA PROCESSED TO: {self.engine.url.database}"
+        return f"====> Data processed to: {self.engine.url.database}"

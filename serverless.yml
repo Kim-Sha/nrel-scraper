@@ -122,5 +122,5 @@ plugins:
 custom:
   pythonRequirements:
     slim: true # Omits tests, __pycache__, *.pyc etc from dependencies
-    fileName: requirements.txt
+    usePipenv: true
     dockerizePip: non-linux

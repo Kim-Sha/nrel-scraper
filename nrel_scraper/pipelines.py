@@ -33,23 +33,19 @@ class NrelScraperPipeline(object):
     def process_item(self, item, spider):
 
         # Read ASCII text data into pandas dataframe and process
-        try:
-            df = pd.read_csv(StringIO(item['data_text']), sep=",")
-            print('====> ASCII text data read into Pandas dataframe')
+        df = pd.read_csv(StringIO(item['data_text']), sep=",")
+        print('====> ASCII text data read into Pandas dataframe')
 
-            df['measurement_ts'] = pd.to_datetime(df['DATE (MM/DD/YYYY)'] + ' ' + df['MST']).dt.tz_localize('MST')
-            df.drop(['DATE (MM/DD/YYYY)', 'MST'], axis=1, inplace=True)
-            df['station_id'] = 1
-            df.columns = df.columns.str.lower()\
-                            .str.replace(r"\(.*\)|\[.*\]", '')\
-                            .str.replace('li-200', 'li200')\
-                            .str.strip().str.replace(r'-|\W+', '_')
-            print('====> Dataframe cleaned')
+        df['measurement_ts'] = pd.to_datetime(df['DATE (MM/DD/YYYY)'] + ' ' + df['MST']).dt.tz_localize('MST')
+        df.drop(['DATE (MM/DD/YYYY)', 'MST'], axis=1, inplace=True)
+        df['station_id'] = 1
+        df.columns = df.columns.str.lower()\
+                        .str.replace(r"\(.*\)|\[.*\]", '')\
+                        .str.replace('li-200', 'li200')\
+                        .str.strip().str.replace(r'-|\W+', '_')
+        print('====> Dataframe cleaned')
 
-            # Write to Postgres
-            df.to_sql('irradiance', self.engine, if_exists='append', index=False)
-
-        except Exception as error:
-            raise error
+        # Write to Postgres
+        df.to_sql('irradiance', self.engine, if_exists='append', index=False)
 
         return f"====> Data processed to: {self.engine.url.database}"

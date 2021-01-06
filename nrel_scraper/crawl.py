@@ -1,4 +1,3 @@
-import sys
 import scrapy
 from scrapy.spiderloader import SpiderLoader
 from scrapy.crawler import CrawlerProcess

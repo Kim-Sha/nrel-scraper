@@ -64,7 +64,12 @@ package:
 functions:
   nrelScrape:
     handler: handler.scrape
-    timeout: 60
+    timeout: 30
+    events:
+      schedule:
+        name: nrel-midc-daily-ingestion
+        description: Scheduled daily scraping of NREL MIDC at 11:59PM MST (UTC-7:00)
+        rate: cron(59 6 * * ? *)
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

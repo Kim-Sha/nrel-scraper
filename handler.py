@@ -3,7 +3,9 @@ import sys
 from nrel_scraper.crawl import crawl
 
 def scrape(event={}, context={}):
-    crawl(**event)
+    print('====> Event:', event)
+    print('====> Context:', context)
+    crawl()
 
 if __name__ == "__main__":
     try:

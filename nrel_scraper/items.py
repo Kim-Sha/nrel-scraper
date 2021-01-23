@@ -8,3 +8,4 @@ import scrapy
 class NrelScraperItem(scrapy.Item):
     # define the fields for your item here like:
     data_text = scrapy.Field()
+    table = scrapy.Field()

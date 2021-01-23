@@ -45,7 +45,7 @@ class NrelScraperPipeline(object):
                         .str.strip().str.replace('-|\W+', '_', regex=True)
         print('====> Dataframe cleaned')
 
-        # Write to Postgres
-        df.to_sql('irradiance', self.engine, if_exists='append', index=False)
+        # Write to associated table in Postgres
+        df.to_sql(item['table'], self.engine, if_exists='append', index=False)
 
         return f"====> Data processed to: {self.engine.url.database}"

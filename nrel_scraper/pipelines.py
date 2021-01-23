@@ -48,4 +48,4 @@ class NrelScraperPipeline(object):
         # Write to associated table in Postgres
         df.to_sql(item['table'], self.engine, if_exists='append', index=False)
 
-        return f"====> Data processed to: {self.engine.url.database}"
+        return f"====> Data processed to: {item['table']} table in {self.engine.url.database}"

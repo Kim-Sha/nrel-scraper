@@ -40,9 +40,9 @@ class NrelScraperPipeline(object):
         df.drop(['DATE (MM/DD/YYYY)', 'MST'], axis=1, inplace=True)
         df['station_id'] = 1
         df.columns = df.columns.str.lower()\
-                        .str.replace("\(.*\)|\[.*\]", '', regex=True)\
-                        .str.replace('li-200', 'li200')\
-                        .str.strip().str.replace('-|\W+', '_', regex=True)
+                               .str.replace("\(.*\)|\[.*\]", '', regex=True)\
+                               .str.replace('li-200', 'li200')\
+                               .str.strip().str.replace('-|\W+', '_', regex=True)
         print('====> Dataframe cleaned')
 
         # Write to associated table in Postgres
